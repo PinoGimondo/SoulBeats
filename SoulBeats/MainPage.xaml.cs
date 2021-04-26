@@ -9,6 +9,7 @@ namespace SoulBeats
     {
         private SoundManager sm;
         private float diff=0;
+        private bool changingDiff = false;
         public MainPage()
         {
             this.InitializeComponent();
@@ -34,7 +35,7 @@ namespace SoulBeats
 
         private void lFreq_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            if (sm != null) {
+            if (sm != null && !changingDiff) {
                 sm.l_freq = (float)lFreq.Value / 10;
                 if (flock.IsChecked==true) {
                    rFreq.Value= (sm.l_freq + diff)*10;
@@ -46,7 +47,7 @@ namespace SoulBeats
 
         private void rFreq_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
-            if (sm != null)
+            if (sm != null )
             {
                 sm.r_freq = (float)rFreq.Value / 10;
                 updateDisplay();
@@ -76,5 +77,27 @@ namespace SoulBeats
 
         }
 
+
+        private void tbDiff_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (!changingDiff)
+            {
+                double val = 0;
+                try
+                {
+                    val = double.Parse(tbDiff.Text) ;
+                    if (val > 50) val = 50;
+                    if (val < 0) val = 0;
+                }
+                catch (Exception)
+                {
+
+                }
+                changingDiff = true;
+                rFreq.Value = ((double)lFreq.Value) + val * 10;
+                changingDiff = false;
+            }
+
+        }
     }
 }

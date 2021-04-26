@@ -17,15 +17,15 @@
             </StackPanel>
  
             <StackPanel Margin="8" Orientation="Horizontal" Background="Snow" BorderBrush="Gray" BorderThickness=".6" >
-                <Slider TickFrequency="100" TickPlacement="Outside"  Margin="0,15,0,0" HorizontalAlignment="Left" ValueChanged="lFreq_ValueChanged" Name="lFreq" Width="800" Minimum="500" Maximum="10000" Value="5000" ></Slider>
+                <Slider TickFrequency="100" TickPlacement="Outside"  Margin="0,15,0,0" HorizontalAlignment="Left" ValueChanged="lFreq_ValueChanged" Name="lFreq" Width="800" Minimum="200" Maximum="20000" Value="5000" ></Slider>
                 <TextBlock Margin="4" FontSize="36">R</TextBlock>
                 <TextBox x:Name="tbLeft" Margin="4" FontSize="23" Width="100"></TextBox>
-                <TextBox x:Name="tbDiff" Margin="4" FontSize="23" Width="100"></TextBox>
+                <TextBox LostFocus="tbDiff_LostFocus" x:Name="tbDiff" Margin="4" FontSize="23" Width="100"></TextBox>
                 <CheckBox IsChecked="False" VerticalAlignment="Top" x:Name="flock" Margin="2" FontSize="25" Width="100" >Lock</CheckBox>
             </StackPanel>
 
             <StackPanel Margin="8" Orientation="Horizontal" Background="Snow" BorderBrush="Gray" BorderThickness=".6" >
-                <Slider TickFrequency="100" TickPlacement="Outside" Margin="0,15,0,0"  HorizontalAlignment="Left"  ValueChanged= "rFreq_ValueChanged" Name="rFreq" Width="800" Minimum="500" Maximum="10000" Value="5000" ></Slider>
+                <Slider TickFrequency="100" TickPlacement="Outside" Margin="0,15,0,0"  HorizontalAlignment="Left"  ValueChanged= "rFreq_ValueChanged" Name="rFreq" Width="800" Minimum="200" Maximum="20000" Value="5000" ></Slider>
                 <TextBlock Margin="6" FontSize="36">L</TextBlock>
                 <TextBox x:Name="tbRight" Margin="4" FontSize="23" Width="100"></TextBox>
             </StackPanel>

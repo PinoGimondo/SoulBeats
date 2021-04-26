@@ -32,9 +32,15 @@ namespace SoulBeats
         private double r_theta = 0;
         private double c_amplitude = 0f;
         private double stepAmplitude = .00003f;
+        private double stepFreq = .1f;
 
         public float l_freq = 500;
         public float r_freq = 500;
+
+        private float cl_freq = 500;
+        private float cr_freq = 500;
+
+
         public float amplitude = 0.50f;
 
         public async void init()
@@ -88,8 +94,6 @@ namespace SoulBeats
                 dataInFloat = (float*)dataInBytes;
 
                 int sampleRate = (int)graph.EncodingProperties.SampleRate;
-                double l_sampleIncrement = (l_freq * P2) / sampleRate;
-                double r_sampleIncrement = (r_freq * P2) / sampleRate;
 
                 // Generate a sine wave and populate the values in the memory buffer
                 // nota che i campioni pari sono per il canale SX, e quelli dispari per il canale DX
@@ -97,14 +101,16 @@ namespace SoulBeats
                 for (int i = 0; i < samples; i++)
                 {
                     c_amplitude = c_amplitude + stepAmplitude * (Math.Sign(amplitude - c_amplitude));
+                    cl_freq = cl_freq + (float)stepFreq * (Math.Sign(l_freq - cl_freq));
+                    cr_freq = cr_freq + (float)stepFreq * (Math.Sign(r_freq - cr_freq));
 
-                    dataInFloat[i] = (float)(c_amplitude * Math.Sin(l_theta));
-
-                    i++;
                     dataInFloat[i] = (float)(c_amplitude * Math.Sin(r_theta));
 
-                    l_theta += l_sampleIncrement;
-                    r_theta += r_sampleIncrement;
+                    i++;
+                    dataInFloat[i] = (float)(c_amplitude * Math.Sin(l_theta));
+
+                    l_theta += (cl_freq * P2) / sampleRate;
+                    r_theta += (cr_freq * P2) / sampleRate;
                 }
             }
 
