@@ -30,6 +30,8 @@ namespace SoulBeats
         private bool isPlaying= false;
         private double l_theta = 0;
         private double r_theta = 0;
+        private double c_amplitude = 0f;
+        private double stepAmplitude = .00003f;
 
         public float l_freq = 500;
         public float r_freq = 500;
@@ -94,10 +96,12 @@ namespace SoulBeats
 
                 for (int i = 0; i < samples; i++)
                 {
-                    dataInFloat[i] = (float)(amplitude * Math.Sin(l_theta));
+                    c_amplitude = c_amplitude + stepAmplitude * (Math.Sign(amplitude - c_amplitude));
+
+                    dataInFloat[i] = (float)(c_amplitude * Math.Sin(l_theta));
 
                     i++;
-                    dataInFloat[i] = (float)(amplitude * Math.Sin(r_theta));
+                    dataInFloat[i] = (float)(c_amplitude * Math.Sin(r_theta));
 
                     l_theta += l_sampleIncrement;
                     r_theta += r_sampleIncrement;
