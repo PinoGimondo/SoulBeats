@@ -10,6 +10,10 @@ namespace SoulBeats
         private SoundManager sm;
         private float diff=0;
         private bool changingDiff = false;
+        private Button[] fbut= new Button[10];
+        private int minFreq = 30;
+        private int maxFreq = 2000;
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -18,6 +22,18 @@ namespace SoulBeats
             lFreq.Value = sm.l_freq * 10;
             rFreq.Value = sm.r_freq * 10;
             slVolume.Value = sm.amplitude * 100;
+
+            fbut[0] = f0;
+            fbut[1] = f1;
+            fbut[2] = f2;
+            fbut[3] = f3;
+            fbut[4] = f4;
+            fbut[5] = f5;
+            fbut[6] = f6;
+            fbut[7] = f7;
+            fbut[8] = f8;
+            fbut[9] = f9;
+
             updateDisplay();
         }
 
@@ -75,8 +91,35 @@ namespace SoulBeats
                 btnStart.Content = "Generate Audio";
             }
 
-        }
+            if (fbut[0] != null) {
 
+                for (int i = 0; i < 10; i++)
+                {
+                    fbut[i].Visibility = Visibility.Collapsed;
+                }
+
+                float ottava = Math.Abs(diff);
+
+                if (ottava > 2)
+                {
+                    int bott = 0;
+                    while (true)
+                    {
+                        ottava = ottava * 2;
+                        if (ottava > minFreq && ottava < maxFreq)
+                        {
+                            Button b = fbut[bott++];
+                            b.Visibility = Visibility.Visible;
+                            b.Content = ottava.ToString();
+                        }
+                        if (ottava > maxFreq || bott >= 9)
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
         private void tbDiff_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -98,6 +141,12 @@ namespace SoulBeats
                 changingDiff = false;
             }
 
+        }
+
+        private void f_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            lFreq.Value = (float.Parse(b.Content.ToString())) * 10;
         }
     }
 }

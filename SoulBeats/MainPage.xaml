@@ -29,7 +29,20 @@
                 <TextBlock Margin="6" FontSize="36">L</TextBlock>
                 <TextBox x:Name="tbRight" Margin="4" FontSize="23" Width="100"></TextBox>
             </StackPanel>
-            
+
+            <StackPanel Margin="8" Orientation="Horizontal" Background="Snow" BorderBrush="Gray" BorderThickness=".6" >
+                <Button Margin="4" Name="f0" Content="10101" Click="f_Click" MinWidth="100" MinHeight="45" />
+                <Button Margin="4" Name="f1" Content="10102" Click="f_Click" MinWidth="100" MinHeight="45" />
+                <Button Margin="4" Name="f2" Content="10103" Click="f_Click" MinWidth="100" MinHeight="45" />
+                <Button Margin="4" Name="f3" Content="10104" Click="f_Click" MinWidth="100" MinHeight="45" />
+                <Button Margin="4" Name="f4" Content="10105" Click="f_Click" MinWidth="100" MinHeight="45" />
+                <Button Margin="4" Name="f5" Content="10106" Click="f_Click" MinWidth="100" MinHeight="45" />
+                <Button Margin="4" Name="f6" Content="10107" Click="f_Click" MinWidth="100" MinHeight="45" />
+                <Button Margin="4" Name="f7" Content="10108" Click="f_Click" MinWidth="100" MinHeight="45" />
+                <Button Margin="4" Name="f8" Content="10109" Click="f_Click" MinWidth="100" MinHeight="45" />
+                <Button Margin="4" Name="f9" Content="1010" Click="f_Click" MinWidth="100" MinHeight="45" />
+            </StackPanel>
+
         </StackPanel>
 
     </Grid>
