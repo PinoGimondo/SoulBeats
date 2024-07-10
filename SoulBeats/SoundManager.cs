@@ -9,6 +9,7 @@ using Windows.Media.Render;
 
 namespace SoulBeats
 {
+    
     // We are initializing a COM interface for use within the namespace
     // This interface allows access to memory at the byte level which we need to populate audio data that is generated
     [ComImport]
@@ -22,6 +23,8 @@ namespace SoulBeats
 
     public class SoundManager
     {
+        private DeviceManager deviceManager;
+
         private AudioGraph graph;
         private AudioDeviceOutputNode deviceOutputNode;
         private AudioFrameInputNode frameInputNode;
@@ -45,6 +48,9 @@ namespace SoulBeats
 
         public async void init()
         {
+            deviceManager = new DeviceManager();
+            deviceManager.StartWatchingDevices();
+
             await CreateAudioGraph();
         }
         public void dispose()
@@ -142,7 +148,8 @@ namespace SoulBeats
             }
 
             deviceOutputNode = deviceOutputNodeResult.DeviceOutputNode;
-//            rootPage.NotifyUser("Device Output Node successfully created", NotifyType.StatusMessage);
+         
+            //            rootPage.NotifyUser("Device Output Node successfully created", NotifyType.StatusMessage);
 
             // Create the FrameInputNode at the same format as the graph, except explicitly set mono.
             AudioEncodingProperties nodeEncodingProperties = graph.EncodingProperties;
